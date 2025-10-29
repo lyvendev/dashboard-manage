@@ -1,34 +1,40 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Manage — Connexion</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manage — Dashboard</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+<script src="app.js" defer></script>
 </head>
-<body class="login-page">
-  <div class="login-container">
-    <div class="login-card glass">
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
       <div class="logo">M</div>
-      <h1>Manage</h1>
-      <p>Le dashboard officiel du bot Discord</p>
-      <button id="discordLogin" class="btn-primary">
-        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f47e.svg" width="18" alt="bot" />
-        Se connecter avec Discord
-      </button>
+      <div><h1>Manage</h1><p>Dashboard du bot</p></div>
     </div>
-  </div>
+    <nav class="nav">
+      <button class="nav-btn active" data-section="servers">📁 Serveurs</button>
+      <button class="nav-btn" data-section="moderation">🛡️ Modération</button>
+      <button class="nav-btn" data-section="logs">📜 Logs</button>
+      <button class="nav-btn" data-section="stats">📊 Statistiques</button>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="logoutBtn" class="btn-ghost">Déconnexion</button>
+    </div>
+  </aside>
 
-  <script>
-    document.getElementById("discordLogin").addEventListener("click", () => {
-      // URL OAuth2 Discord (mockée, à remplacer plus tard)
-      const clientId = "1431421654038351942";
-      const redirectUri = encodeURIComponent(window.location.origin + "/dashboard.html");
-      const scope = encodeURIComponent("identify guilds");
-      const responseType = "token";
-      const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
-      window.location.href = discordAuthUrl;
-    });
-  </script>
+  <main class="main">
+    <div class="topbar card" id="userArea">Chargement...</div>
+    <div class="content">
+      <div id="serversView" class="view active"><h2>Serveurs</h2><div id="serversGrid" class="grid"></div></div>
+      <div id="moderationView" class="view"><h2>Modération</h2><p class="muted">Fonctionnalités à venir.</p></div>
+      <div id="logsView" class="view"><h2>Logs</h2><p class="muted">Historique à venir.</p></div>
+      <div id="statsView" class="view"><h2>Statistiques</h2><canvas id="statsChart"></canvas></div>
+    </div>
+  </main>
+</div>
 </body>
 </html>
